@@ -1,4 +1,4 @@
-const { User } = require('../models'); // Assuming you have a User model
+const { User } = require('../models'); 
 
 const fetchUser = async (req, res, next) => {
     const userId = req.query.userId || req.header('userId'); // User ID passed via query or header

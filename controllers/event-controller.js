@@ -22,8 +22,8 @@ exports.createEvent = async (req, res) => {
     }
 };
 exports.deleteEvent = async (req, res) => {
-    const { id } = req.params; // Assuming the event ID is passed in the URL
-    const userId = req.user.id; // Assuming the user ID is stored in req.user (usually after authentication middleware)
+    const { id } = req.params; 
+    const userId = req.user.id; 
 
     try {
         // Find the event by its ID
