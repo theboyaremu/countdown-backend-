@@ -1,10 +1,12 @@
-// routes/user.routes.js
 const express = require('express');
-const {createEvent, deleteEvent} = require("../controllers/event-controller.js")
+const { createEvent, deleteEvent } = require('../controllers/event-controller.js');
 
 const eventRouter = express.Router();
 
-eventRouter.post('/sign-up', createEvent);
-eventRouter.post('/sign-up', deleteEvent)
+// Define route for creating an event
+eventRouter.post('/create-event', createEvent);
 
-module.exports = { eventRouter };
+// Define route for deleting an event
+eventRouter.delete('/delete-event', deleteEvent); 
+
+module.exports =  eventRouter ;

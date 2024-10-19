@@ -1,8 +1,7 @@
 const http = require('http');
 const express = require('express');
-const {userRouter} = require('./routes/user.routes.js'); // No need for destructuring
-const sequelize = require('./config/db.js');
-const { eventRouter } = require('./routes/event.routes.js');
+const userRouter = require('./routes/user.routes.js');
+const eventRouter = require('./routes/event.routes.js');
 
 const PORT = process.env.PORT || 3005;
 
