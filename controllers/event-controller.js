@@ -45,3 +45,33 @@ exports.deleteEvent = async (req, res) => {
         return res.status(500).json({ error: 'Failed to delete event' });
     }
 };
+
+// Get events by userId
+exports.getEvents = async (req, res) => {
+    // Extract userId from the query parameters (or headers, if needed)
+    const userId = req.query.userId || req.header('userId');
+
+    // Check if userId was provided
+    if (!userId) {
+        return res.status(400).json({ error: 'User ID is required to fetch events.' });
+    }
+
+    try {
+        // Find all events for the given userId
+        const events = await Event.findAll({
+            where: { userId }, // Filter events by userId
+            order: [['eventDate', 'ASC'], ['eventTime', 'ASC']], // Sort by eventDate and eventTime
+        });
+
+        // Check if no events were found
+        if (events.length === 0) {
+            return res.status(404).json({ message: 'No events found for this user.' });
+        }
+
+        // Return the found events
+        return res.status(200).json({ events });
+    } catch (error) {
+        console.error('Error fetching events:', error);
+        return res.status(500).json({ error: 'Failed to fetch events.' });
+    }
+};

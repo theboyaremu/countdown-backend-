@@ -7,6 +7,7 @@ const SALT_ROUNDS = 10;
 // Create User (Sign Up)
 const createUser = async (req, res) => {
   const { username, email, password } = req.body;
+  
 
   try {
     // Check if the email is already in use
@@ -49,14 +50,52 @@ const signIn = async (req, res) => {
       return res.status(400).json({ message: 'Invalid email or password.' });
     }
 
-    return res.status(200).json({ message: 'Signed in successfully.', user });
+    // If login is successful, set userId in the response header and return success message
+    res.setHeader('userId', user.id); // Set userId in the header
+
+    return res.status(200).json({ 
+      message: 'Signed in successfully.', 
+      userId: user.id, // Include user ID in the response body as well
+      username: user.username,
+      email: user.email 
+    });
   } catch (error) {
     console.error('Error signing in:', error);
     return res.status(500).json({ error: 'Failed to sign in.' });
   }
 };
+const getUserInfo = async (req, res) => {
+  const { userId } = req.params; 
+
+  if (!userId) {
+    return res.status(400).json({ error: 'User ID is required.' });
+  }
+
+  try {
+    // Find the user by their ID
+    const user = await User.findByPk(userId, {
+      attributes: ['id', 'username', 'email'] // Only select necessary fields
+    });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found.' });
+    }
+
+    return res.status(200).json({ 
+      userId: user.id, 
+      username: user.username, 
+      email: user.email 
+    });
+  } catch (error) {
+    console.error('Error fetching user info:', error);
+    return res.status(500).json({ error: 'Failed to fetch user info.' });
+  }
+};
+
+
 
 module.exports = {
   createUser,
   signIn,
+  getUserInfo
 };
