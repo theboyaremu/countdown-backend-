@@ -1,5 +1,5 @@
 const express = require('express');
-const { createEvent, deleteEvent, getEvents } = require('../controllers/event-controller.js');
+const { createEvent, deleteEvent, getEvents, getEventById } = require('../controllers/event-controller.js');
 
 const eventRouter = express.Router();
 
@@ -10,5 +10,7 @@ eventRouter.post('/create-event', createEvent);
 eventRouter.delete('/delete-event/:id', deleteEvent); 
 
 eventRouter.get('/events/:id', getEvents)
+eventRouter.get('/event/:id', getEventById); // Assuming eventRouter is defined elsewhere
+
 
 module.exports =  eventRouter ;

@@ -65,15 +65,15 @@ const signIn = async (req, res) => {
   }
 };
 const getUserInfo = async (req, res) => {
-  const { userId } = req.params; 
+  const { id } = req.params; 
 
-  if (!userId) {
+  if (!id) {
     return res.status(400).json({ error: 'User ID is required.' });
   }
 
   try {
     // Find the user by their ID
-    const user = await User.findByPk(userId, {
+    const user = await User.findByPk(id, {
       attributes: ['id', 'username', 'email'] // Only select necessary fields
     });
 
@@ -91,7 +91,6 @@ const getUserInfo = async (req, res) => {
     return res.status(500).json({ error: 'Failed to fetch user info.' });
   }
 };
-
 
 
 module.exports = {
