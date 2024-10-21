@@ -3,16 +3,10 @@ const { Sequelize, DataTypes } = require("sequelize");
 const UserModel = require("../models/user.js");
 const EventModel = require("../models/event.js")
 
-const sequelize = new Sequelize('counter', 'postgres', 'tremothegoat', {
+const sequelize = new Sequelize('counter', 'postgres', 'Tommyz2004', {
   host: '127.0.0.1',
   dialect: 'postgres',
   logging: false,
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false,
-    },
-  },
 });
 
 // Sync models with the database

@@ -4,7 +4,7 @@ const { Event } = require('../config/db.js'); // Adjust the import according to 
 
 exports.createEvent = async (req, res) => {
     const { eventName, eventDate, eventTime, userId } = req.body;
-  
+    console.log(req.body)
     // Validate the input fields
     if (!eventName || !eventDate || !eventTime || !userId) {
       return res.status(400).json({ error: 'All fields are required.' });
