@@ -10,7 +10,7 @@ eventRouter.post('/create-event', createEvent);
 eventRouter.delete('/delete-event/:id', deleteEvent); 
 
 eventRouter.get('/events/:id', getEvents)
-eventRouter.get('/event/:id', getEventById); // Assuming eventRouter is defined elsewhere
+eventRouter.get('/event/:id', getEventById); 
 
 
 module.exports =  eventRouter ;

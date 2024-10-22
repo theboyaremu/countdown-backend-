@@ -3,9 +3,7 @@
 const { Event } = require('../config/db.js'); // Adjust the import according to your structure
 
 exports.createEvent = async (req, res) => {
-    const { eventName, eventDate, eventTime, userId } = req.body;
-    console.log(req.body)
-    // Validate the input fields
+    const { eventName, eventDate, eventTime, userId } = req.body;    // Validate the input fields
     if (!eventName || !eventDate || !eventTime || !userId) {
       return res.status(400).json({ error: 'All fields are required.' });
     }
@@ -17,6 +15,7 @@ exports.createEvent = async (req, res) => {
         eventTime,
         userId: parseInt(userId) // Ensure userId is an integer
       });
+      console.log(newEvent)
   
       return res.status(201).json({
         message: 'Event created successfully',
@@ -55,20 +54,19 @@ exports.deleteEvent = async (req, res) => {
 
 // Get events by userId
 exports.getEvents = async (req, res) => {
-    const userId = req.query.userId; // Extract userId from the query parameters
+    const { id } = req.params; // Extract the event ID from the URL parameters
 
-    // Check if userId was provided
-    if (!userId) {
+    // Check if id was provided
+    if (!id) {
         return res.status(400).json({ error: 'User ID is required to fetch events.' });
     }
 
     try {
-        // Find all events for the given userId
+        // Find all events for the given id
         const events = await Event.findAll({
-            where: { userId }, // Filter events by userId
+            where: { id }, // Filter events by id
             order: [['eventDate', 'ASC'], ['eventTime', 'ASC']], // Sort by eventDate and eventTime
         });
-
         // Check if no events were found
         if (events.length === 0) {
             return res.status(404).json({ message: 'No events found for this user.' });

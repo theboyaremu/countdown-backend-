@@ -2,7 +2,7 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const UserModel = require("../models/user.js");
 const EventModel = require("../models/event.js")
-
+//Tommyz2004
 const sequelize = new Sequelize('counter', 'postgres', 'Tommyz2004', {
   host: '127.0.0.1',
   dialect: 'postgres',
